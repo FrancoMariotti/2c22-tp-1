@@ -1,7 +1,7 @@
-var express = require("express");
-const axios = require("axios");
+import express from 'express';
+import axios from 'axios';
 var app = express();
-const { fibonacci } = require("./intensive");
+import fibonacci from './intensive.js';
 
 // Constants
 const PORT = 3000;
@@ -21,7 +21,7 @@ app.get("/fibonacci", function (req, res) {
   } else {
     fib = fibonacci(parseInt(req.query.n));
   }
-  res.send(fib);
+  res.send({fib});
 });
 
 app.get("/sync", (req, res) => {
