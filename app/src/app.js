@@ -1,7 +1,8 @@
 import express from 'express';
 import axios from 'axios';
-var app = express();
 import fibonacci from './intensive.js';
+
+var app = express();
 
 const port = process.env.PORT || 5000;
 
@@ -10,7 +11,6 @@ app.get("/", function (req, res) {
   res.status(200).send("PING");
 });
 
-//Intensive
 app.get("/fibonacci", function (req, res) {
   console.log("FIBONACCI");
   var fib;
