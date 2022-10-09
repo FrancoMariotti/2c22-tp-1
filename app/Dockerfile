@@ -10,6 +10,6 @@ RUN npm install
 #Bundle app source
 COPY ./src . 
 
-EXPOSE 3000
+EXPOSE 5000
 
 CMD ["node","app.js"]
