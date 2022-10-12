@@ -45,4 +45,4 @@ scenarios:
   - name: Fibonacci
     flow:
       - get:
-          url: '/fibonacci?n=20'
+          url: '/fibonacci?n=5'

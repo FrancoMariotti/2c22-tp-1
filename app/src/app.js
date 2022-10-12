@@ -6,7 +6,7 @@ var app = express();
 
 const port = process.env.PORT || 5000;
 
-app.get("/", function (req, res) {
+app.get("/ping", function (req, res) {
   console.log("PING");
   res.status(200).send("PING");
 });
@@ -22,8 +22,7 @@ app.get("/fibonacci", function (req, res) {
   res.send({fib});
 });
 
-app.get("/sync", (req, res) => {
-  console.log('Bbox 9090 sync');
+app.get("/bbox-1", (req, res) => {
   axios.get(`http://bbox:9090/`)
       .then(result => {
           res.send(`Bbox port 9090: Status ${result.status} Data ${result.data}`);
@@ -33,8 +32,7 @@ app.get("/sync", (req, res) => {
       });
 });
 
-app.get("/async", (req, res) => {
-  console.log('Bbox 9090 async');
+app.get("/bbox-2", (req, res) => {
   axios.get(`http://bbox:9091/`)
       .then(result => {
           res.send(`Bbox port 9091: Status ${result.status} Data ${result.data}`);
