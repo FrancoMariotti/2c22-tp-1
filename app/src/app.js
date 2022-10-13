@@ -44,4 +44,34 @@ app.get("/async", (req, res) => {
       });
 });
 
+app.post("/login", (req, res) => {
+  console.log("Intento de login");
+  setTimeout(() => { res.status(200).send("Login exitoso"); }, 250);
+});
+
+app.get("/seleccionarCarrera", (req, res) => {
+  console.log("seleccionar carrera");
+  setTimeout(() => { res.status(200).send("Carrera seleccionada"); }, 100);
+});
+
+app.get("/misInscripciones", (req, res) => {
+  console.log("Ver mis inscripciones");
+  setTimeout(() => { res.status(200).send("Inscripciones obtenidas"); }, 250);
+});
+
+app.get("/ofertaAcademica", (req, res) => {
+  console.log("Ver oferta academica");
+  setTimeout(() => { res.status(200).send("Oferta academica obtenida"); }, 800);
+});
+
+app.post("/inscribirse", (req, res) => {
+  console.log("Intento de inscripcion");
+  setTimeout(() => { res.status(200).send("Inscripcion exitosa"); }, 350);
+});
+
+app.get("/logout", (req, res) => {
+  console.log("Intento de logout");
+  setTimeout(() => { res.status(200).send("Logout exitoso"); }, 150);
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
