@@ -5,7 +5,6 @@ services:
         build: ./app
         ports:
             - 5000
-
     nginx:
         image: nginx:1.23.1
         ports:

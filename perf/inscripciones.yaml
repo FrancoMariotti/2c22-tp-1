@@ -1,0 +1,69 @@
+config:
+  environments:
+    node:
+      target: 'http://localhost:5555/node'
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-node"
+          
+    node-replicated:
+      target: 'http://localhost:5555/node-replicated'
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-node-replicated"
+
+  pool: 70 # All HTTP requests from all virtual users will be sent over the same connections
+
+  phases:
+    #- name: start
+    #  duration: 60
+    #  arrivalCount: 70
+    - name: double_users
+      duration: 60
+      arrivalCount: 175
+
+scenarios:
+  - name: inscripcion
+    weight: 6
+    flow:
+      - post:
+          url: '/login'
+      # Consideramos que pasan 3 segundos entre que se presiona el boton que crea la request
+      - think: 3
+      - get:
+          url: '/seleccionarCarrera'    
+      - loop:
+        - think: 3    
+        - get:
+            url: '/ofertaAcademica'
+        #Consideramos que cada alumno se toma 60 segundos para analizar las comisiones y 3 para hacer click en inscribirse
+        - think: 63    
+        - post:
+            url: '/inscribirse'
+        - think: 3
+        - get:
+            url: '/misInscripciones'
+        #Consideramos que cada alumno se toma 10 segundos para revisar sus inscripciones
+        - think: 10    
+        count: 4
+      - think: 3
+      - get:
+          url: '/logout'
+
+  - name: revisionOferta
+    weight: 4
+    flow:
+      - post:
+          url: '/login'
+      # Consideramos que pasan 3 segundos entre que se presiona el boton que crea la request
+      - think: 3
+      - get:
+          url: '/ofertaAcademica'
+      #Consideramos que cada alumno se toma 60 segundos para analizar las comisiones y 3 para hacer click en inscribirse
+      - think: 123   
+      - get:
+          url: '/logout'
