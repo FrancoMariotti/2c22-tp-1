@@ -40,4 +40,4 @@ scenarios:
   - name: Intensive Fibonacci (/fibonacci)
     flow:
       - get:
-          url: '/fibonacci?n=45'
+          url: '/fibonacci?n=20'

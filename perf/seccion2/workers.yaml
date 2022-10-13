@@ -1,0 +1,43 @@
+config:
+  environments:
+    bbox-1:
+      target: 'http://localhost:5555/node/bbox-1'
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-bbox-1"
+          
+    bbox-2:
+      target: 'http://localhost:5555/node/bbox-2'
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-bbox-2"
+
+
+  pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
+
+  phases:
+    - name: Step1
+      duration: 10
+      arrivalRate: 1
+    - name: Step2
+      duration: 10
+      arrivalRate: 2
+    - name: Step3
+      duration: 10
+      arrivalRate: 3
+    - name: Step4
+      duration: 10
+      arrivalRate: 4
+    - name: Step5
+      duration: 10
+      arrivalRate: 5
+
+scenarios:
+  - name: Ping
+    flow:
+      - get:
+          url: '/'
