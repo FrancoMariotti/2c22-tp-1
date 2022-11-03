@@ -1,9 +1,11 @@
-import express from 'express';
-import axios from 'axios';
-import fibonacci from './intensive.js';
+const express = require('express')
+const axios = require('axios');
+const fibonacci = require('./intensive.js');
+var SDC = require('statsd-client'),
+	sdc = new SDC({host: 'graphite', port: 8125});
 
 var app = express();
-
+app.use(sdc.helpers.getExpressMiddleware('node-app'));
 const port = process.env.PORT || 5000;
 
 app.get("/ping", function (req, res) {
