@@ -26,19 +26,19 @@ config:
     - name: Positive Ramp
       duration: 10
       arrivalRate: 10
-      rampTo: 80
+      rampTo: 60
 
     - name: Plain
       duration: 100
-      arrivalRate: 70
+      arrivalRate: 50
 
     - name: Negative Ramp
       duration: 15
-      arrivalRate: 70
+      arrivalRate: 50
       rampTo: 10
 
 scenarios:
   - name: Fibonacci
     flow:
       - get:
-          url: '/fibonacci?n=28'
+          url: '/fibonacci?n=26'
