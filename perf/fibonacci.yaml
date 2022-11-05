@@ -16,33 +16,29 @@ config:
           port: 8125
           prefix: "artillery-node-replicated"
 
-  pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
+  pool: 1 # All HTTP requests from all virtual users will be sent over the same connections
 
   phases:
     - name: start
-      duration: 15
-      arrivalRate: 5000
+      duration: 1
+      arrivalRate: 5
 
     - name: Positive Ramp
-      duration: 20
-      arrivalRate: 5000
-      rampTo: 50000
+      duration: 10
+      arrivalRate: 10
+      rampTo: 60
 
     - name: Plain
-      duration: 40
-      arrivalRate: 50000
-      
+      duration: 100
+      arrivalRate: 50
+
     - name: Negative Ramp
       duration: 15
-      arrivalRate: 50000
-      rampTo: 5000
-      
-    - name: final
-      duration: 15
-      arrivalRate: 2500
+      arrivalRate: 50
+      rampTo: 10
 
 scenarios:
   - name: Fibonacci
     flow:
       - get:
-          url: '/fibonacci?n=5'
+          url: '/fibonacci?n=26'
